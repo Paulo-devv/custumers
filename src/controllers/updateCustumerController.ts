@@ -18,11 +18,16 @@ class updateCustumerController {
 
         const UpdateCustumerService = new updateCustumerService()
 
-        const custumer = await UpdateCustumerService.update({id, updateData})
+        try {
+            const custumer = await UpdateCustumerService.update({id, updateData})
+            reply.send(custumer);
+        } catch (error) {
+            console.error(error);
+            reply.status(500).send({ message: "Erro interno do servidor" })
+        };
 
-        reply.send(custumer)
         
-    }
-}
-
+        
+    };
+};
 export { updateCustumerController }

@@ -7,9 +7,15 @@ class listCustumerController{
 
         const ListCustumerService = new listCustumerService();
 
-        const custumers = await ListCustumerService.execute()
+        try {
+            const custumers = await ListCustumerService.execute()
+            reply.send(custumers);
+        } catch (error) {
+            console.error(error);
+            reply.status(500).send({ message: "Erro ao listar clientes"})
+        };
 
-        reply.send(custumers);
+        
     };
 }
 
